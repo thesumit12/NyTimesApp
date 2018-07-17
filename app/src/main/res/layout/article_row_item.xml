@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_article_title"
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="heading"
+        android:textColor="#000"
+        android:paddingTop="8dp"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_article_byline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_article_date"
+        app:layout_constraintTop_toBottomOf="@id/tv_article_title"
+        android:text="some test"
+        android:paddingBottom="8dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/tv_article_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="22/03/2018"
+        android:layout_marginEnd="4dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintStart_toEndOf="@id/tv_article_byline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tv_article_byline"/>
+
+</android.support.constraint.ConstraintLayout>
