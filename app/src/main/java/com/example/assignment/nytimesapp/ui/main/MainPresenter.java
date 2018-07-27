@@ -1,8 +1,11 @@
 package com.example.assignment.nytimesapp.ui.main;
 
+import android.widget.ImageView;
+
 import com.example.assignment.nytimesapp.data.DataManager;
 import com.example.assignment.nytimesapp.data.network.ApiHelper;
 import com.example.assignment.nytimesapp.data.network.model.Article;
+import com.example.assignment.nytimesapp.data.network.model.Media;
 import com.example.assignment.nytimesapp.ui.base.BasePresenter;
 
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.List;
 public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> implements
         MainMvpPresenter<V>, ApiHelper.OnFinishedListener {
     private List<Article> mList;
+    private String url;
 
     public MainPresenter(DataManager dataManager) {
         super(dataManager);
@@ -24,9 +28,13 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
     @Override
     public void onBindRoomRowViewAtPosition(int position, ArticleRowView rowView) {
         Article article = mList.get(position);
+        List<Media> mediaList = article.getMedia();
+        List<Media.MediaMetadatum> mediaMetadata = mediaList.get(0).getMediaMetadata();
+        url = mediaMetadata.get(0).getUrl();
         rowView.setTitle(article.getTitle());
         rowView.setByline(article.getByline());
         rowView.setDate(article.getPublishedDate());
+        rowView.setImage();
     }
 
     @Override
@@ -38,9 +46,17 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
     }
 
     @Override
+    public void setImageUsingUrl(ImageView articleImage) {
+        getMvpView().setArticleImage(url, articleImage);
+    }
+
+    @Override
     public void onItemInteraction(int position) {
         Article article = mList.get(position);
-        getMvpView().navigateToArticleDetail(article.getTitle(),article.getAbstract());
+        List<Media> mediaList = article.getMedia();
+        List<Media.MediaMetadatum> mediaMetadata = mediaList.get(0).getMediaMetadata();
+        url = mediaMetadata.get(0).getUrl();
+        getMvpView().navigateToArticleDetail(article.getTitle(),article.getAbstract(), url);
     }
 
     @Override

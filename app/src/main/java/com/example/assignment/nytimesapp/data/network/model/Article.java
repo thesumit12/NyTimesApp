@@ -3,6 +3,8 @@ package com.example.assignment.nytimesapp.data.network.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Article {
 
     @SerializedName("url")
@@ -32,6 +34,10 @@ public class Article {
     @SerializedName("views")
     @Expose
     private Integer views;
+
+    @SerializedName("media")
+    @Expose
+    private List<Media> media = null;
 
     public String getUrl() {
         return url;
@@ -98,6 +104,12 @@ public class Article {
         this.views = views;
     }
 
+    public List<Media> getMedia() {
+        return media;
+    }
 
+    public void setMedia(List<Media> media) {
+        this.media = media;
+    }
 
 }

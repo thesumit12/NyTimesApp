@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.assignment.nytimesapp.R;
 import com.example.assignment.nytimesapp.ui.main.ArticleRowView;
 import com.example.assignment.nytimesapp.ui.main.MainMvpPresenter;
@@ -46,6 +48,8 @@ public class MyArticleAdapter extends RecyclerView.Adapter<MyArticleAdapter.Arti
         TextView mByline;
         @BindView(R.id.tv_article_date)
         TextView mDate;
+        @BindView(R.id.article_image)
+        ImageView articleImage;
 
         public ArticleHolder(View itemView) {
             super(itemView);
@@ -66,6 +70,11 @@ public class MyArticleAdapter extends RecyclerView.Adapter<MyArticleAdapter.Arti
         @Override
         public void setDate(String date) {
             mDate.setText(date);
+        }
+
+        @Override
+        public void setImage() {
+            mPresenter.setImageUsingUrl(articleImage);
         }
 
         @Override
